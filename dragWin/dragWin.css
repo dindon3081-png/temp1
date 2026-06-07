@@ -1,0 +1,168 @@
+#DragWin {
+	position: absolute;
+	background: #e9e9e9;
+	border: 1px solid #444;
+	border-radius: 5px;
+	box-shadow: 0 1px 3px 2px #666;
+	/* margin: 0 auto;	// 左右置中, PS: 改用$.fn做 */
+}
+#DragWin, #DragRest {	/* DragRest: 最小化時的還原鈕 */
+	z-index: 1101;	/* mobile-PopUp(1000) */
+}
+#DragWin .title {
+	position: relative;
+	height: 27px;
+	margin: 5px;
+}
+
+#DragWin .title h2 {
+	font-size: 18px;
+	height: 30px;
+	/* line-height: 24px; */
+	border-bottom: 2px solid #23AA8D;
+}
+/* 按鈕列及調整大小的指標 */
+#DragWin tools {
+	position: absolute;
+	height: 19px;
+	top: 2px;
+	right: 0;
+}
+
+#DragWin tools>a, #DragRest {
+	float: left;
+	width: 21px;
+	height: 19px;
+	display: block;
+	margin-left: 5px;
+	background: url(tool.png) no-repeat;
+}
+
+#DragWin tools>a {
+	cursor: pointer;	/* 使出手指 */
+}
+/* 還原視窗 鈕 */
+#DragRest:hover {
+	background-position: 0 -29px;
+}
+#DragWin tools>a.min {
+	background-position: -29px 0;
+}
+#DragWin tools>a.min:hover {
+	background-position: -29px -29px;
+}
+#DragWin tools>a.max {
+	background-position: -60px 0;
+}
+#DragWin tools>a.max:hover {
+	background-position: -60px -29px;
+}
+#DragWin tools>a.revert {
+	background-position: -149px 0;
+	display: none;
+}
+#DragWin tools>a.revert:hover {
+	background-position: -149px -29px;
+}
+#DragWin tools>a.close {
+	background-position: -89px 0;
+}
+#DragWin tools>a.close:hover {
+	background-position: -89px -29px;
+}
+#DragWin .resizeBR {
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	cursor: nw-resize;
+	background: url(resize.png) no-repeat;
+}
+#DragWin .resizeL, #DragWin .resizeT, #DragWin .resizeR, #DragWin .resizeB, #DragWin .resizeLT, #DragWin .resizeTR, #DragWin .resizeLB {
+	position: absolute;
+	background: #000;
+	overflow: hidden;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+#DragWin .resizeL, #DragWin .resizeR {
+	top: 0;
+	width: 5px;
+	height: 100%;
+	cursor: w-resize;
+}
+#DragWin .resizeR {
+	right: 0;
+}
+#DragWin .resizeT, #DragWin .resizeB {
+	width: 100%;
+	height: 5px;
+	cursor: n-resize;
+}
+#DragWin .resizeT {
+	top: 0;
+}
+#DragWin .resizeB {
+	bottom: 0;
+}
+#DragWin .resizeLT, #DragWin .resizeTR, #DragWin .resizeLB {
+	width: 8px;
+	height: 8px;
+	background: #FF0;
+}
+#DragWin .resizeLT {
+	top: 0;
+	left: 0;
+	cursor: nw-resize;
+}
+#DragWin .resizeTR {
+	top: 0;
+	right: 0;
+	cursor: ne-resize;
+}
+#DragWin .resizeLB {
+	left: 0;
+	bottom: 0;
+	cursor: ne-resize;
+}
+
+/* 視窗內容區(含iscroll) */
+#ViewHere {
+	z-index: 30;
+	position: relative;
+	overflow: hidden;
+	margin: 15px;
+
+	-webkit-tap-highlight-color: rgba(0,0,0,0);	/* 透明化 */
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	/* Prevent the callout on tap-hold and text selection */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/* Prevent text resize on orientation change, useful for web-apps */
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+.Draggable {
+	cursor: move; /* fallback: no `url()` support or images disabled */
+	cursor: -webkit-grab; /* Chrome 1-21, Safari 4+ */
+	cursor:	-moz-grab; 		/* Firefox 1.5-26 */
+	cursor: grab; 				/* W3C standards syntax, should come least */
+}
+.Draggable:active {
+	cursor: -webkit-grabbing;
+	cursor:	-moz-grabbing;
+	cursor: grabbing;
+}
